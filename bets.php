@@ -9,6 +9,7 @@ else $revision = "";
 
 $step = "bets$revision";
 $history = include(__DIR__ . DIRECTORY_SEPARATOR . "history$revision.php");
+$statistics = include(__DIR__ . DIRECTORY_SEPARATOR . "statistics.php");
 
 function factorial($n){
     if($n <= 0) return 1;
@@ -164,7 +165,7 @@ for ($raceNumber = 1; $raceNumber <= $numberOfRaces; $raceNumber++) {
     $c = count(array_intersect($favorites, $winInter));
     $d = count(array_unique(array_values(array_merge($favorites, $winInter))));
     $compact = $a . "" . $b . "" . $c . "" . $d;
-    if(in_array($compact, [ 0123, 0112, 2114, 2013, 5016, 3025, 5106, 3104, 2103, 6208])) {
+    if(in_array($compact, $statistics)) {
         $racetext .= "\t\t\t'super sure bet' => 'super sure place " . end($favorites) . "',\n" ;
         $totalBets[$raceNumber] += $unitBet;
         $totalSurePlace -= $unitBet;

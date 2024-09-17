@@ -23,8 +23,7 @@ $outtext .= "return [ ";
             $a = count(array_diff($winInter, $favorites));
             $b = count(array_diff($favorites, $winInter));
             $c = count(array_intersect($favorites, $winInter));
-            $d = count(array_unique(array_values(array_merge($favorites, $winInter))));
-            $compact = $a . "" . $b . "" . $c . "" . $d;
+            $compact = $a . "" . $b . "" . $c;
             if(in_array($last, array_slice($winners, 0, 3))){
                 if(!isset($statistics[$compact])) $statistics[$compact] = true;
             }
