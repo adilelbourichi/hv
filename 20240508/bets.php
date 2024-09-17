@@ -190,12 +190,11 @@ return [
 		'win inter' => '2, 10',
 		'allValues' => '1, 3, 5, 6, 7',
 		'bets' => [
-			'super sure bet' => 'super sure place 10',
 		],
 		'total bets' => 0,
 	],
 ];
 //total major place favorites: 0
 //total major place wp: 55
-//total minor place: 0
+//total sure place: 0
 //total: 55
