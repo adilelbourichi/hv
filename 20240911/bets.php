@@ -16,13 +16,11 @@ return [
 			2 => 13,
 			3 => 17,
 		],
-		'win inter' => '1, 2',
-		'allValues' => '1, 2, 3, 4, 5, 6, 7, 8, 9',
+		'win inter' => '2',
+		'allValues' => '',
 		'bets' => [
-			'place(end-wp , $100)' => '7',
 		],
-		'total bets' => 100,
-		'total won in race 1' => -100,
+		'total bets' => 0,
 	],
 	'2' => [
 		/**
@@ -39,8 +37,8 @@ return [
 			6 => 38,
 			8 => 13.5,
 		],
-		'win inter' => '2, 3, 5',
-		'allValues' => '1, 2, 3, 4, 5, 6, 7, 8',
+		'win inter' => '2, 5',
+		'allValues' => '2, 4, 6, 7, 8',
 		'bets' => [
 		],
 		'total bets' => 0,
@@ -60,8 +58,8 @@ return [
 			8 => 42.5,
 			4 => 11,
 		],
-		'win inter' => '2, 3, 4, 7',
-		'allValues' => '1, 2, 3, 4, 5, 6, 7, 8',
+		'win inter' => '4',
+		'allValues' => '',
 		'bets' => [
 		],
 		'total bets' => 0,
@@ -82,7 +80,7 @@ return [
 			7 => 17.5,
 		],
 		'win inter' => '',
-		'allValues' => '1, 2, 3, 4, 5, 6, 7',
+		'allValues' => '',
 		'bets' => [
 		],
 		'total bets' => 0,
@@ -102,8 +100,8 @@ return [
 			6 => 62.5,
 			1 => 20.5,
 		],
-		'win inter' => '1, 2, 3, 4, 5, 7, 12',
-		'allValues' => '1, 2, 3, 4, 5, 6, 7, 8, 10, 11',
+		'win inter' => '1, 2, 5, 7',
+		'allValues' => '',
 		'bets' => [
 		],
 		'total bets' => 0,
@@ -123,8 +121,8 @@ return [
 			1 => 17,
 			10 => 50,
 		],
-		'win inter' => '1, 3, 6',
-		'allValues' => '1, 2, 3, 4, 5, 6, 7, 8, 9, 10',
+		'win inter' => '1, 3',
+		'allValues' => '1, 3, 7, 8, 9, 10',
 		'bets' => [
 		],
 		'total bets' => 0,
@@ -144,13 +142,11 @@ return [
 			5 => 32,
 			11 => 29.5,
 		],
-		'win inter' => '2, 3, 10',
-		'allValues' => '1, 2, 3, 4, 5, 6, 7, 8, 9',
+		'win inter' => '2',
+		'allValues' => '',
 		'bets' => [
-			'place(end-favorites , $100)' => '10',
 		],
-		'total bets' => 100,
-		'total won in race 7' => -100,
+		'total bets' => 0,
 	],
 	'8' => [
 		/**
@@ -167,14 +163,14 @@ return [
 			1 => 36,
 			6 => 92.5,
 		],
-		'win inter' => '3',
-		'allValues' => '1, 2, 3, 4, 5, 6, 7, 8',
+		'win inter' => '',
+		'allValues' => '1, 2, 3, 4, 5, 6, 7',
 		'bets' => [
 		],
 		'total bets' => 0,
 	],
 ];
-//total major place favorites: -100
-//total major place wp: -100
+//total major place favorites: 0
+//total major place wp: 0
 //total minor place: 0
-//total: -200
+//total: 0

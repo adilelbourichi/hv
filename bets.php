@@ -159,8 +159,8 @@ for ($raceNumber = 1; $raceNumber <= $numberOfRaces; $raceNumber++) {
             $totalMajorPlaceW += (1 * $unitBet / 10) * $placeAmount[end($wp)];
         }
     }
-    if(count($favorites) >= 3 && count(array_intersect($winInter, $favorites)) >= 3) {
-        $racetext .= "\t\t\t'super sure bet' => 'super sure place " . end($wp) . "',\n" ;
+    if(count($favorites) >= 3 && count(array_intersect($winInter, $favorites)) >= 2) {
+        $racetext .= "\t\t\t'super sure bet' => 'super sure place " . end($favorites) . "',\n" ;
     }
     $racetext .= "\t\t],\n";
     $racetext .= "\t\t'total bets' => $totalBets[$raceNumber],\n";
