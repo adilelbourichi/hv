@@ -159,7 +159,12 @@ for ($raceNumber = 1; $raceNumber <= $numberOfRaces; $raceNumber++) {
             $totalMajorPlaceW += (1 * $unitBet / 10) * $placeAmount[end($wp)];
         }
     }
-    if(count($favorites) >= 3 && count($winInter) > 1 && count(array_diff($winInter, $favorites)) === 0) {
+    $a = count(array_diff($winInter, $favorites));
+    $b = count(array_diff($favorites, $winInter));
+    $c = count(array_intersect($favorites, $winInter));
+    $d = count(array_unique(array_values(array_merge($favorites, $winInter))));
+    $compact = $a . "" . $b . "" . $c . "" . $d;
+    if(in_array($compact, [ 0123, 0112, 2114, 2013, 5016, 3025, 5106, 3104, 2103, 6208])) {
         $racetext .= "\t\t\t'super sure bet' => 'super sure place " . end($favorites) . "',\n" ;
         $totalBets[$raceNumber] += $unitBet;
         $totalSurePlace -= $unitBet;

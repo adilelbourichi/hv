@@ -166,8 +166,11 @@ return [
 		'win inter' => '3, 4, 5',
 		'allValues' => '1, 2, 3, 4, 5, 6, 7',
 		'bets' => [
+			'super sure bet' => 'super sure place 3',
+			'5 won(place bet)' => 130,
 		],
-		'total bets' => 0,
+		'total bets' => 100,
+		'total won in race 8' => 30,
 	],
 	'9' => [
 		/**
@@ -193,5 +196,5 @@ return [
 ];
 //total major place favorites: 0
 //total major place wp: 0
-//total sure place: 0
-//total: 0
+//total sure place: 30
+//total: 30
