@@ -21,9 +21,8 @@ $outtext .= "return [ ";
             if(!isset($data['official win']) || empty($data['official win'])) continue;
             $winners = explode(", ", $data['official win']);
             $a = count(array_diff($winInter, $favorites));
-            $b = count(array_diff($favorites, $winInter));
             $c = count(array_intersect($favorites, $winInter));
-            $compact = $a . "" . $b . "" . $c;
+            $compact = $a . "" . $c;
             if(in_array($last, array_slice($winners, 0, 3))){
                 if(!isset($statistics[$compact])) $statistics[$compact] = true;
             }

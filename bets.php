@@ -161,10 +161,8 @@ for ($raceNumber = 1; $raceNumber <= $numberOfRaces; $raceNumber++) {
         }
     }
     $a = count(array_diff($winInter, $favorites));
-    $b = count(array_diff($favorites, $winInter));
     $c = count(array_intersect($favorites, $winInter));
-    $d = count(array_unique(array_values(array_merge($favorites, $winInter))));
-    $compact = $a . "" . $b . "" . $c . "" . $d;
+    $compact = $a . "" . $c;
     if(in_array($compact, $statistics)) {
         $racetext .= "\t\t\t'super sure bet' => 'super sure place " . end($favorites) . "',\n" ;
         $totalBets[$raceNumber] += $unitBet;
