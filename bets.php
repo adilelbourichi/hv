@@ -112,7 +112,7 @@ for ($raceNumber = 1; $raceNumber <= $numberOfRaces; $raceNumber++) {
     $racetext .= "\t\t'win inter' => '" . implode(", ", $winInter) . "',\n";
     $unitBet = 100;
     $racetext .= "\t\t'bets' => [\n";
-    if(count($favorites) >= 3 && count($winInter) === 2 && count(array_intersect($winInter, $favorites)) >= 2) {
+    if(count($favorites) >= 3 && count($winInter) === 2 && count(array_intersect($winInter, $favorites)) === 2) {
         $racetext .= "\t\t\t'super sure bet' => 'super sure place " . end($favorites) . "',\n" ;
         $totalBets[$raceNumber] += $unitBet;
         $totalSurePlace -= $unitBet;
