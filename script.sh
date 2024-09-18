@@ -1,4 +1,4 @@
-for f in *; do
+for f in 2024*; do
     if [ -d "$f" ] && [ $f != "archive" ]; then
         rm -Rf $f;
         php populate.php;
