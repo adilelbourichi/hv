@@ -1,5 +1,8 @@
 <?php
 
+if(isset($argv[1])) $optionalExtension = trim($argv[1]);
+else $optionalExtension = "";
+
 $outFile = __DIR__ . DIRECTORY_SEPARATOR . "history.php";
 $outtext = "<?php\n";
 $outtext .= "return [\n";
