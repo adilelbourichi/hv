@@ -76,7 +76,7 @@ return [
 			4 => 32.5,
 			11 => 18,
 		],
-		'win inter' => '2, 6',
+		'win inter' => '1, 2, 6',
 		'bets' => [
 		],
 		'total bets' => 0,
