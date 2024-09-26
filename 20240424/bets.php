@@ -80,7 +80,7 @@ return [
 			9 => 26,
 		],
 		'win inter' => '2, 6',
-		'allValues' => '2, 5, 7, 8',
+		'allValues' => '2, 3, 5, 7, 8, 9',
 		'bets' => [
 		],
 		'total bets' => 0,
