@@ -16,7 +16,7 @@ return [
 			7 => 22.5,
 			5 => 44,
 		],
-		'win inter' => '1, 4',
+		'win inter' => '1, 3, 4',
 		'allValues' => '',
 		'bets' => [
 		],
@@ -163,7 +163,7 @@ return [
 			2 => 18,
 			10 => 34.5,
 		],
-		'win inter' => '3',
+		'win inter' => '3, 5',
 		'allValues' => '1, 2, 3, 4, 5, 6, 7',
 		'bets' => [
 		],
