@@ -1,5 +1,16 @@
 <?php
 
+function get2Sets($array){
+    $result = [];
+    sort($array);
+    foreach($array as $one){
+        foreach($array as $two){
+            if($two > $one) $result[] = "$one, $two";
+        }
+    }
+    return $result;
+}
+
 function getPlaceOdds($date, $venueCode, $raceNo, $type = "PLA"){
   $endpoint = "https://info.cld.hkjc.com/graphql/base/";
   $qryParams = [];
