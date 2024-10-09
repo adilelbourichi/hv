@@ -4,6 +4,6 @@ php getwinodds.php $raceDate HV 8;
 php bets.php $raceDate;
 for i in `seq 1 443`; 
 do 
-    php bets.php $raceDate hv$i;
+    php bets.php $raceDate $i;
 done
 php agregate.php $raceDate;
