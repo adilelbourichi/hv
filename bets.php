@@ -1,4 +1,7 @@
+
 <?php
+
+require 'functions.php';
 
 if(!isset($argv[1])) die("Race Date Not Entered!!\n");
 
@@ -9,6 +12,7 @@ else $revision = "";
 
 $step = "bets$revision";
 $history = include(__DIR__ . DIRECTORY_SEPARATOR . "history$revision.php");
+$favhistory = include(__DIR__ . DIRECTORY_SEPARATOR . "favhistory.php");
 
 function factorial($n){
     if($n <= 0) return 1;
@@ -66,6 +70,25 @@ for ($raceNumber = 1; $raceNumber <= $numberOfRaces; $raceNumber++) {
     if(!in_array($favorite, $favorites)) $favorites[] = $favorite;
     $favorites = array_intersect($favorites, $runners);
     sort($favorites);
+    $_2sets = get2Sets($favorites);
+    $suggestions = ["win" => [], "qin" => [], "trio" => []];
+    $firstShit = true;
+    $winInter2 = [];
+    foreach($_2sets as $example){
+        if(isset($favhistory[$raceNumber][$example])) {
+            if($firstShit){
+                $winInter2 = $favhistory[$raceNumber][$example]["win"];
+                $firstShit = false;
+            }
+            else $winInter2 = array_intersect($winInter2, $favhistory[$raceNumber][$example]["win"]);
+            $suggestions["win"] = array_values(array_unique(array_merge($suggestions["win"], $favhistory[$raceNumber][$example]["win"])));
+            $suggestions["qin"] = array_values(array_unique(array_merge($suggestions["qin"], $favhistory[$raceNumber][$example]["qin"])));
+            $suggestions["trio"] = array_values(array_unique(array_merge($suggestions["trio"], $favhistory[$raceNumber][$example]["trio"])));
+        }
+    }
+    $suggestions["win"] = array_intersect($suggestions["win"], $runners);
+    $suggestions["qin"] = array_intersect($suggestions["qin"], $runners);
+    $suggestions["trio"] = array_intersect($suggestions["trio"], $runners);
     sort($runners);
     $racetext = "";
     $racetext .= "\t'$raceNumber' => [\n";
@@ -80,6 +103,18 @@ for ($raceNumber = 1; $raceNumber <= $numberOfRaces; $raceNumber++) {
     if(isset($officialWin)){
         $racetext .= "\t\t'official win' => '" . implode(", ", $officialWin) . "',\n"; 
     }
+    sort($suggestions["win"]);
+    sort($suggestions["qin"]);
+    sort($suggestions["trio"]);
+    
+    $racetext .= "\t\t'suggestions' => [\n";
+    $racetext .= "\t\t\t'win' => '" . implode(", ", $suggestions["win"]) . "',\n";
+    $racetext .= "\t\t\t'qin' => '" . implode(", ", $suggestions["qin"]) . "',\n";
+    $racetext .= "\t\t\t'trio' => '" . implode(", ", $suggestions["trio"]) . "',//count trio: " . count($suggestions["trio"]) . "\n";
+    $inter = array_intersect($favorites, $suggestions["win"]);
+    $racetext .= "\t\t\t'inter' => '" . implode(", ", $inter) . "',\n";
+    
+    $racetext .= "\t\t],\n";
     if(isset($winAmount)){
         $racetext .= "\t\t'win amount' => " . $winAmount . ",\n"; 
     }
@@ -110,6 +145,9 @@ for ($raceNumber = 1; $raceNumber <= $numberOfRaces; $raceNumber++) {
     }
     sort($winInter);
     $racetext .= "\t\t'win inter' => '" . implode(", ", $winInter) . "',\n";
+    if(!empty($winInter2)){
+        $racetext .= "\t\t'win inter 2' => '" . implode(", ", $winInter2) . "',\n";
+    }
     $unitBet = 100;
     $allValues = [];
     foreach($runners  as $one){
@@ -137,8 +175,10 @@ for ($raceNumber = 1; $raceNumber <= $numberOfRaces; $raceNumber++) {
     }
     sort($allValues);
     $racetext .= "\t\t'allValues' => '" . implode(", ", $allValues) . "',\n";
+    $condition1 = !empty($winInter2);
+    $condition2 = !empty($winInter);
     $racetext .= "\t\t'bets' => [\n";
-    if(count($favorites) >= 3 && in_array(count($winInter), [3, 4, 5])){
+    if($condition1 && $condition2 && count($favorites) >= 3){
         $racetext .= "\t\t\t'place(end-favorites $revision, $" . $unitBet . ")' => '" .  end($favorites)  . "',\n"; 
         $totalBets[$raceNumber] += $unitBet;
         $totalMajorPlaceF -= $unitBet;
@@ -149,7 +189,7 @@ for ($raceNumber = 1; $raceNumber <= $numberOfRaces; $raceNumber++) {
         }
     }
     $wp = array_intersect($allValues, $favorites);
-    if(count($wp) === 3){
+    if($condition1 && $condition2 && count($wp) === 3){
         $racetext .= "\t\t\t'place(end-wp $revision, $" . $unitBet . ")' => '" . end($wp) . "',\n"; 
         $totalBets[$raceNumber] += $unitBet;
         $totalMajorPlaceW -= $unitBet;
@@ -159,7 +199,17 @@ for ($raceNumber = 1; $raceNumber <= $numberOfRaces; $raceNumber++) {
             $totalMajorPlaceW += (1 * $unitBet / 10) * $placeAmount[end($wp)];
         }
     }
-    if(count($favorites) >= 3 && count($winInter) === 2 && count(array_intersect($winInter, $favorites)) === 2) {
+    if(count($winInter2) === 1 && count($wp) === 1){
+        $racetext .= "\t\t\t'place(end-wp $revision, $" . $unitBet . ")' => '" . end($wp) . "',\n"; 
+        $totalBets[$raceNumber] += $unitBet;
+        $totalMajorPlaceW -= $unitBet;
+        if(isset($officialWin) && in_array(end($wp), array_slice($officialWin, 0, 3)) && isset($placeAmount[end($wp)])){
+            $totalRace[$raceNumber] += (1 * $unitBet / 10) * $placeAmount[end($wp)];
+            $racetext .= "\t\t\t'2 won(place bet)' => " . (1 * $unitBet / 10) * $placeAmount[end($wp)] . ",\n";
+            $totalMajorPlaceW += (1 * $unitBet / 10) * $placeAmount[end($wp)];
+        }
+    }
+    if(count($favorites) >= 3 && count(array_intersect($winInter, $favorites)) >= 2 && $condition1) {
         $racetext .= "\t\t\t'super sure bet' => 'super sure place " . end($favorites) . "',\n" ;
         $totalBets[$raceNumber] += $unitBet;
         $totalSurePlace -= $unitBet;
@@ -171,6 +221,7 @@ for ($raceNumber = 1; $raceNumber <= $numberOfRaces; $raceNumber++) {
     }
     $racetext .= "\t\t],\n";
     $racetext .= "\t\t'total bets' => $totalBets[$raceNumber],\n";
+    $racetext .= "\t\t'wp' => '" . implode(", ", $wp) . "',//count wp: " . count($wp) . "\n";
     $totalRace[$raceNumber] -= $totalBets[$raceNumber];
     if(isset($officialWin) && $totalBets[$raceNumber] > 0){
         $racetext .= "\t\t'total won in race $raceNumber' => " . $totalRace[$raceNumber] . ",\n";
