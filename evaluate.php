@@ -48,7 +48,6 @@ echo "Total place end favorites: " . $totalPlaceF . "\n";
 echo "Total place end wp: " . $totalPlaceEndW . "\n";
 echo "Total place wp: " . $totalPlaceW . "\n";
 echo "Total sure place: " . $totalSurePlace . "\n";
-echo "Total win: " . $totalPlaceW . "\n";
 echo "Total Shatin: " . $totalST . "\n";
 echo "Total Happy Valley: " . $totalHV . "\n";
 echo "Total: " . $total . "\n";
